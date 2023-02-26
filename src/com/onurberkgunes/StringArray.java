@@ -10,60 +10,92 @@ public class StringArray {
 	
 	public StringArray() {
 		super();
-		this.stringArr = new String[1];
+		this.stringArr = null;
 	}
 	
 	//////////////////////////////////Methods//////////////////////////////////
 
-	public void push(String string) {
-		this.lengthC++;
-		String[] newArr = new String[this.lengthC];
-		if (this.stringArr.length >= 1) {
-			for(int i = 0; i < this.stringArr.length; i++) {
-				newArr[i] = this.stringArr[i];
-			}
-		newArr[lengthC - 1] = string;
-		this.stringArr = newArr;
-		}
-	}
-	
 	public void push(String... string) {
 		this.lengthC += string.length;
 		String[] newArr = new String[this.lengthC];
-		if (this.stringArr.length >= 1) {
+		if(this.stringArr != null) {
 			for(int i = 0; i < this.stringArr.length; i++) {
 				newArr[i] = this.stringArr[i];
+			}		
+			int j = 0;
+			for(int i = this.stringArr.length; i < newArr.length; i++) {			
+				newArr[i] = string[j++];
 			}
-		int j= string.length - 1;
-		for(int i = this.lengthC -1; i >= this.stringArr.length; i--) {			
-			newArr[i] = string[j--];
-		}		
-		this.stringArr = newArr;
 		}
+		else {
+			int j = 0;
+			for(int i = 0; i < newArr.length; i++) {			
+				newArr[i] = string[j++];
+			}
+		}
+		this.stringArr = newArr;		
 	}
 	
 	public void pop(int elementCount) {
 		this.lengthC -= elementCount;
 		String[] newArr = new String[this.lengthC];
-		if (this.stringArr.length > 0) {
-			for(int i = 0; i < lengthC; i++) {
-				newArr[i] = this.stringArr[i];
-			}
-		this.stringArr = newArr;
+		for(int i = 0; i < lengthC; i++) {
+			newArr[i] = this.stringArr[i];
 		}
+		this.stringArr = newArr;
 	}
 	
 	public void pop() {
 		this.lengthC--;
 		String[] newArr = new String[this.lengthC];
-		if (this.stringArr.length > 0) {
-			for(int i = 0; i < lengthC; i++) {
-				newArr[i] = this.stringArr[i];
-			}
-		this.stringArr = newArr;
+		for(int i = 0; i < lengthC; i++) {
+			newArr[i] = this.stringArr[i];
 		}
+		this.stringArr = newArr;
 	}
 		
+	public void addAtIndex(int index, String... string) {
+		this.lengthC += string.length;
+		String[] newArr = new String[this.lengthC];
+		if(this.stringArr != null) {
+			for(int i = 0; i < index; i++) {
+				newArr[i] = this.stringArr[i];
+			}
+			for(int i = index, j = 0; i < (index + string.length); i++) {
+				newArr[i] = string[j++];
+			}			
+			for(int i = index; i < this.stringArr.length; i++) {
+				newArr[i + string.length] = this.stringArr[i];
+			}
+		}
+		else {
+			for(int i = 0; i < lengthC; i++) {
+				newArr[i] = string[i];
+			}
+		}
+		this.stringArr = newArr;
+	}
+			
+	public void removeAtIndexes(int... index) {
+		this.lengthC -= index.length;
+		String[] newArr = new String[lengthC];
+		for(int i = 0; i < this.stringArr.length; i++) {
+			for(int j = 0; j < index.length; j++) {
+				if(i == index[j]) {
+					this.stringArr[i] = null;
+				}
+			}
+		}
+		int k = 0;
+		for(String string : stringArr) {
+			if(string != null) {
+				newArr[k] = string;
+				k++;
+			}
+		}
+		this.stringArr = newArr;
+	}
+	
 	/////////////////////////////Getters & Setters/////////////////////////////
 	
 	public String[] getStringArr() {
