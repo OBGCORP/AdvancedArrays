@@ -1,9 +1,13 @@
 package com.onurberkgunes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tests {
 
 	public static void main(String[] args) {
 		StringArray stringArray = new StringArray();
+		
 		stringArray.push("deneme1");
 		stringArray.push("deneme2");
 		stringArray.push("deneme3");
@@ -59,7 +63,7 @@ public class Tests {
 		System.out.println(stringArray.getStringArr().length);
 		
 		System.out.println("9* * * * * * * * * * * * * * * * *");
-		stringArray.addAtIndex(3, "added1", "added2");
+		stringArray.addTheseAtIndex(3, "added1", "added2");
 		for(String string : stringArray.getStringArr()) {
 			System.out.println(string);
 		}
@@ -69,6 +73,14 @@ public class Tests {
 		for(String string : stringArray.getStringArr()) {
 			System.out.println(string);
 		}
+		
+		System.out.println("11* * * * * * * * * * * * * * * * *");
+		stringArray.addThisAtEachIndex("sandwich", 2, 7, 5);
+		for(String string : stringArray.getStringArr()) {
+			System.out.println(string);
+		}
+		System.out.println("12* * * * * * * * * * * * * * * * *");
+		stringArray.toString();
 		
 	}
 }
